@@ -12,7 +12,6 @@ buttonElementsArray.forEach((button) => {
         // Remove .is-depressed class from all keys
         Array.from(key.parentNode.children)
             .forEach(k => k.classList.remove('is-depressed'))
-
         //check how to fill the display depending on the key clicked;
         if (!action) {
             buttonsDiv.dataset.previousKey = 'number'
@@ -58,12 +57,16 @@ buttonElementsArray.forEach((button) => {
                 displayEl.textContent = calculate(firstValue, secondValue, operator);
                 buttonsDiv.dataset.previousKey = 'resultPrint'
             }else{
-                
             }
         
         } else if (action === 'clear') {
             buttonsDiv.dataset.previousKey = 'clear'
-            displayEl.textContent = ''
+            if(previousKeyType !== 'clear'){
+                displayEl.textContent = ''
+            }else{
+                buttonsDiv.dataset.firstValue ='';
+                buttonsDiv.dataset.operator ='';
+            }
         } else if (action === 'go-back') {
             buttonsDiv.dataset.previousKey = 'wentBack'
             //remove the previous value entered
@@ -76,9 +79,9 @@ buttonElementsArray.forEach((button) => {
             buttonsDiv.dataset.previousKey = 'decimal'
             displayEl.textContent = displayedNum + '.'
             //check if an operator was clicked
-            }else if (previousKeyType === 'operator') {
-                displayEl.textContent = '0.'
-              }
+            }if (previousKeyType === 'operator') {
+                displayEl.textContent = '0.';
+             }
         }
     })
 })
