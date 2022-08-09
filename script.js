@@ -27,6 +27,9 @@ buttonElementsArray.forEach((button) => {
             action === 'multiply' ||
             action === 'divide'
         ) {
+            const firstValue = buttonsDiv.dataset.firstValue
+            const operator = buttonsDiv.dataset.operator
+            const secondValue = displayedNum
             //remove functionality once an operator is selected
             key.classList.add('is-depressed');
             //adding attribute to buttonDiv showing that the last clicked was an operator
@@ -34,6 +37,17 @@ buttonElementsArray.forEach((button) => {
             //add the firstValue and operator as attributes
             buttonsDiv.dataset.firstValue = displayedNum;
             buttonsDiv.dataset.operator = action;
+            //if after 2 values an operator has been clicked -> update the result without "="
+            //prepare the code for edge cases -> so that the first value is not filled in by the previous second one 
+            if(firstValue && 
+                operator && 
+                previousKeyType === 'number') {
+                calculatedValue = calculate(firstValue, secondValue, operator);
+                displayEl.textContent = calculatedValue;
+                buttonsDiv.dataset.firstValue = calculatedValue;
+            }else{
+                buttonsDiv.dataset.firstValue = displayedNum;
+            }
 
         } else if (action === 'get-result') {
             buttonsDiv.dataset.previousKey = 'resultPrint'
@@ -48,6 +62,7 @@ buttonElementsArray.forEach((button) => {
             displayEl.textContent = ''
         } else if (action === 'go-back') {
             buttonsDiv.dataset.previousKey = 'wentBack'
+            //remove the previous value entered
             let temporaryArr = Array.from(displayedNum);
             temporaryArr.pop()
             displayEl.textContent = temporaryArr.join('')
