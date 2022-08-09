@@ -50,13 +50,17 @@ buttonElementsArray.forEach((button) => {
             }
 
         } else if (action === 'get-result') {
-            buttonsDiv.dataset.previousKey = 'resultPrint'
             //get the values from the present attributes
+            const operator = buttonsDiv.dataset.operator;
             const firstValue = buttonsDiv.dataset.firstValue;
             const secondValue = displayedNum;
-            const operator = buttonsDiv.dataset.operator;
-            displayEl.textContent = calculate(firstValue, secondValue, operator)
-            console.log('equal key')
+            if (firstValue && operator && previousKeyType === 'number') {
+                displayEl.textContent = calculate(firstValue, secondValue, operator);
+                buttonsDiv.dataset.previousKey = 'resultPrint'
+            }else{
+                
+            }
+        
         } else if (action === 'clear') {
             buttonsDiv.dataset.previousKey = 'clear'
             displayEl.textContent = ''
