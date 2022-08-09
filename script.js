@@ -52,9 +52,27 @@ buttonElementsArray.forEach((button) => {
             temporaryArr.pop()
             displayEl.textContent = temporaryArr.join('')
         } else if (action === "decimal") {
+            //check if decimal point has been added already
+            if(!displayedNum.includes('.')){
             buttonsDiv.dataset.previousKey = 'decimal'
             displayEl.textContent = displayedNum + '.'
+            //check if an operator was clicked
+            }else if (previousKeyType === 'operator') {
+                displayEl.textContent = '0.'
+              }
         }
     })
 })
 
+function calculate(n1, n2, operator){
+    let result = 0;
+    n1 = Number(n1);
+    n2 = Number(n2);
+    switch(operator){
+        case "sum": result = n1 + n2; break;
+        case "subtract": result = n1 - n2; break;
+        case "multiply": result = n1 * n2; break;
+        case "divide": result = n1 / n2; break;
+    }
+    return result;
+}
