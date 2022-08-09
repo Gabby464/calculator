@@ -1,27 +1,32 @@
-function evaluation(operator,...args) {
-    let result = 0;
-    if (args.length !== 2) {
-        console.log('error')
-    } else {
-        let a = args[0];
-        let b = args[1];
-        switch (operator) {
-            case '+':
-                result = a + b;
-                break;
-            case '-':
-                result = a - b;
-                break;
-            case '*':
-                result = a * b;
-                break;
-            case '/':
-                result = a / b;
-                break;
-            default:
-                break;
+const buttonElementsArray = Array.from(document.getElementsByClassName('buttons'));
+const displayEl = document.querySelector(".user-input");
+
+buttonElementsArray.forEach((button) => {
+    button.addEventListener('click', (event) => {
+        const key = event.target;
+        const action = key.dataset.action;
+        const keyContent = key.textContent;
+        const displayedNum = displayEl.textContent;
+
+
+        //checks that detirmine the type of button clicked
+        if (!action) {
+            console.log('number key')
+        }else if (
+            action === 'sum' ||
+            action === 'subtract' ||
+            action === 'multiply' ||
+            action === 'divide'
+        ) {
+            console.log('operator key!')
+        }else if(action === 'get-result'){
+            console.log('equal key')
+        }else if(action === 'clear'){
+            console.log('clear key')
+        }else if(action === 'go-back'){
+            console.log('go back key')
+        }else if(action === "decimal"){
+            console.log('decimal key')
         }
-        console.log(result)
-    }
-}
-evaluation('/', -5, -9)
+    })
+})
