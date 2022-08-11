@@ -1,6 +1,9 @@
-const buttonElementsArray = Array.from(document.getElementsByClassName('buttons'));
+const buttonElementsArray = Array.from(document.getElementsByTagName('button'));
 const displayEl = document.querySelector(".user-input");
 const buttonsDiv = document.querySelector(".buttons")
+
+//add keyboard functionality
+
 
 buttonElementsArray.forEach((button) => {
     button.addEventListener('click', (event) => {
@@ -53,6 +56,7 @@ buttonElementsArray.forEach((button) => {
             const operator = buttonsDiv.dataset.operator;
             const firstValue = buttonsDiv.dataset.firstValue;
             const secondValue = displayedNum;
+            //only action the request if all needed values are present and the last one was a number
             if (firstValue && operator && previousKeyType === 'number') {
                 displayEl.textContent = calculate(firstValue, secondValue, operator);
                 buttonsDiv.dataset.previousKey = 'resultPrint'
@@ -61,6 +65,7 @@ buttonElementsArray.forEach((button) => {
         
         } else if (action === 'clear') {
             buttonsDiv.dataset.previousKey = 'clear'
+            //if clicked once, clear the current value, if twice clear all saved data
             if(previousKeyType !== 'clear'){
                 displayEl.textContent = ''
             }else{
