@@ -41,13 +41,13 @@ buttonElementsArray.forEach((button) => {
             buttonsDiv.dataset.operator = action;
             //if after 2 values an operator has been clicked -> update the result without "="
             //prepare the code for edge cases -> so that the first value is not filled in by the previous second one 
-            if(firstValue && 
-                operator && 
+            if (firstValue &&
+                operator &&
                 previousKeyType === 'number') {
                 calculatedValue = calculate(firstValue, secondValue, operator);
                 displayEl.textContent = calculatedValue;
                 buttonsDiv.dataset.firstValue = calculatedValue;
-            }else{
+            } else {
                 buttonsDiv.dataset.firstValue = displayedNum;
             }
 
@@ -60,17 +60,16 @@ buttonElementsArray.forEach((button) => {
             if (firstValue && operator && previousKeyType === 'number') {
                 displayEl.textContent = calculate(firstValue, secondValue, operator);
                 buttonsDiv.dataset.previousKey = 'resultPrint'
-            }else{
-            }
-        
+            } else {}
+
         } else if (action === 'clear') {
             buttonsDiv.dataset.previousKey = 'clear'
             //if clicked once, clear the current value, if twice clear all saved data
-            if(previousKeyType !== 'clear'){
+            if (previousKeyType !== 'clear') {
                 displayEl.textContent = ''
-            }else{
-                buttonsDiv.dataset.firstValue ='';
-                buttonsDiv.dataset.operator ='';
+            } else {
+                buttonsDiv.dataset.firstValue = '';
+                buttonsDiv.dataset.operator = '';
             }
         } else if (action === 'go-back') {
             buttonsDiv.dataset.previousKey = 'wentBack'
@@ -80,26 +79,35 @@ buttonElementsArray.forEach((button) => {
             displayEl.textContent = temporaryArr.join('')
         } else if (action === "decimal") {
             //check if decimal point has been added already
-            if(!displayedNum.includes('.')){
-            buttonsDiv.dataset.previousKey = 'decimal'
-            displayEl.textContent = displayedNum + '.'
-            //check if an operator was clicked
-            }if (previousKeyType === 'operator') {
+            if (!displayedNum.includes('.')) {
+                buttonsDiv.dataset.previousKey = 'decimal'
+                displayEl.textContent = displayedNum + '.'
+                //check if an operator was clicked
+            }
+            if (previousKeyType === 'operator') {
                 displayEl.textContent = '0.';
-             }
+            }
         }
     })
 })
 
-function calculate(n1, n2, operator){
+function calculate(n1, n2, operator) {
     let result = 0;
     n1 = Number(n1);
     n2 = Number(n2);
-    switch(operator){
-        case "sum": result = n1 + n2; break;
-        case "subtract": result = n1 - n2; break;
-        case "multiply": result = n1 * n2; break;
-        case "divide": result = n1 / n2; break;
+    switch (operator) {
+        case "sum":
+            result = n1 + n2;
+            break;
+        case "subtract":
+            result = n1 - n2;
+            break;
+        case "multiply":
+            result = n1 * n2;
+            break;
+        case "divide":
+            result = n1 / n2;
+            break;
     }
     return result;
 }
