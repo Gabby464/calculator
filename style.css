@@ -1,0 +1,48 @@
+.container{
+    display: flex;
+}
+button{
+    background-color: #FF8C00;
+    width: 3.5em;
+    height: 3.5em;
+    border:2px solid #FF8C00;
+    border-radius: 10%;
+    margin: 2px 
+}
+.buttons{
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.numeric-only{
+    display: flex;
+    width: 10em;
+    height: 10em;
+    flex-flow: wrap-reverse;
+
+}
+.calc-class{
+    display: flex;
+    align-items: center;
+}
+.calc-class-diff{
+    justify-content: space-between;
+    align-items:center;
+
+}
+#delete, 
+#go-back, 
+#sum,
+#result,
+#decimal,
+#zero{
+    width: 4.5em;
+    height: 3em;
+}
+.calc-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
